@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: user-crud
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    generate-ddl: false
+    database: H2
+    properties:
+      hibernate:
+        default_schema: user_crud_db
+        dialect: org.hibernate.dialect.H2Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  h2:
+    console:
+      enabled: true
+  messages:
+    always-use-message-format: true
+    basename: i18n/messages
+    encoding: UTF-8
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:h2:mem:demo}
+    username: ${DATASOURCE_USERNAME:user_crud_ubt}
+    password: ${DATASOURCE_PASSWORD:pass}
+    platform: h2
+    driver-class-name: org.h2.Driver
+    hikari:
+      connectionTimeout: 2500
+      idleTimeout: 600000
+      maxLifetime: 1000000
+      minimumIdle: 2
+      maximumPoolSize: 75
+    messages:
+      always-use-message-format: true
+      basename: i18n/messages
+      encoding: UTF-8
+
+#############################################################################
+## Server configuration
+#############################################################################
+server:
+  port: ${PORT:80}
+
+#############################################################################
+## Management configuration
+#############################################################################
+management:
+  health:
+    db:
+      enabled: false
+    diskspace:
+      enabled: true
+    defaults:
+      enabled: true
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+feign:
+  httpclient:
+    disableSslValidation: true
+  hystrix:
+    enabled: true
+  retry:
+    maxAttempts: 2
+    delay:
+      initial: 1000
+      max: 3
+
+hystrix:
+  shareSecurityContext: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 400000

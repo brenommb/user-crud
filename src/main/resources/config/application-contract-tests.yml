@@ -1,0 +1,19 @@
+#############################################################################
+## Server configuration
+#############################################################################
+server:
+  port: ${PORT:8789}
+
+#############################################################################
+## Postgresql Configuration
+#############################################################################
+spring:
+  datasource:
+    url: ${DB_URL}?currentSchema=user_crud_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      connection-timeout: 250
+      idle-timeout: 10000
+      max-lifetime: 1000000
+      maximum-pool-size: 2
