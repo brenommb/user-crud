@@ -62,4 +62,11 @@ public class UserResource {
 		return ResponseEntity.ok(userMapper.mapEntityListToResponse(userService.findByCompanyId(companyId)));
 	}
 
+	@ApiOperation(value = "This endpoint will delete a user.")
+	@DeleteMapping(value = "user-id/{userId}/")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteByUserId(@PathVariable final Long userId) {
+		userService.deleteByUserId(userId);
+	}
+
 }

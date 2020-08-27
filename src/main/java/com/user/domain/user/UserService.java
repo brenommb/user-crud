@@ -47,4 +47,8 @@ public class UserService {
 		return userRepository.findByCompany_CompanyNumber(companyId);
 	}
 
+	public void deleteByUserId(final Long userId) {
+		userRepository.deleteById(userId);
+	}
+
 }
