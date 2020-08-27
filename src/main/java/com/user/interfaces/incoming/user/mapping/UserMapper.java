@@ -13,22 +13,15 @@ import java.util.List;
 public interface UserMapper {
 
 	default UserEntity mapRequestToEntity(final PersistUserRequest request) {
-		//@formatter: off
-		return UserEntity.builder()
-				.company(CompanyEntity.builder().companyNumber(request.getCompanyId()).build())
-				.birthDate(request.getBirthDate())
-				.email(request.getEmail())
-				.build();
-		//@formatter: on
+		// @formatter: off
+		return UserEntity.builder().company(CompanyEntity.builder().companyNumber(request.getCompanyId()).build())
+				.birthDate(request.getBirthDate()).email(request.getEmail()).build();
+		// @formatter: on
 	}
 
 	default UserResponse mapToResponse(UserEntity entity) {
-		return UserResponse.builder()
-				.userId(entity.getUserId())
-				.companyId(entity.getCompany().getCompanyNumber())
-				.email(entity.getEmail())
-				.birthDate(entity.getBirthDate())
-				.build();
+		return UserResponse.builder().userId(entity.getUserId()).companyId(entity.getCompany().getCompanyNumber())
+				.email(entity.getEmail()).birthDate(entity.getBirthDate()).build();
 	}
 
 	default List<UserResponse> mapEntityListToResponse(final List<UserEntity> userList) {

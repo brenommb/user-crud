@@ -9,16 +9,13 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 public class PackageOrganizing {
 
-	//TODO: Revisar pacotes de arquitetura
-
 	@Test
 	public void incoming_must_not_see_outcoming() {
 		JavaClasses classes = new ClassFileImporter().importPackages("com.user");
 
 		ArchRule rule = noClasses().that().resideInAPackage("..user.interfaces.incoming..").and()
 				.haveSimpleNameNotEndingWith("TestIT").should().accessClassesThat()
-				.resideInAPackage("..user.interfaces.outcoming..")
-				.because("Should access package domain first");
+				.resideInAPackage("..user.interfaces.outcoming..").because("Should access package domain first");
 
 		rule.check(classes);
 

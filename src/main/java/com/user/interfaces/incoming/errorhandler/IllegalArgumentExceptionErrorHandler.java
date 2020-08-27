@@ -26,8 +26,8 @@ public class IllegalArgumentExceptionErrorHandler extends ExceptionErrorHandler<
 	protected ResponseEntity build(final IllegalArgumentException exception) {
 		final String errorMessage = super.getMessage(MessageErrorCode.INVALID_ARGUMENT);
 		log.error(errorMessage, exception);
-		final List<ErrorMessage> errorMessages = Collections
-				.singletonList(new ErrorMessage(MessageErrorCode.INVALID_ARGUMENT, errorMessage, exception.getLocalizedMessage()));
+		final List<ErrorMessage> errorMessages = Collections.singletonList(
+				new ErrorMessage(MessageErrorCode.INVALID_ARGUMENT, errorMessage, exception.getLocalizedMessage()));
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(errorMessages));
 	}
 

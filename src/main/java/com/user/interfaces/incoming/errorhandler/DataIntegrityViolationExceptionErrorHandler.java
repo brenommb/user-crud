@@ -11,20 +11,22 @@ import java.util.List;
 import java.util.Locale;
 
 @Slf4j
-public class DataIntegrityViolationExceptionErrorHandler extends ExceptionErrorHandler<DataIntegrityViolationException> {
+public class DataIntegrityViolationExceptionErrorHandler
+		extends ExceptionErrorHandler<DataIntegrityViolationException> {
 
 	private DataIntegrityViolationExceptionErrorHandler(final MessageSource messageSource, final Locale locale) {
 		super(messageSource, locale);
 	}
 
-	public static ResponseEntity build(final DataIntegrityViolationException exception, final MessageSource messageSource,
-			final Locale locale) {
+	public static ResponseEntity build(final DataIntegrityViolationException exception,
+			final MessageSource messageSource, final Locale locale) {
 		return new DataIntegrityViolationExceptionErrorHandler(messageSource, locale).build(exception);
 	}
 
 	@Override
 	protected ResponseEntity build(final DataIntegrityViolationException exception) {
-		List<ErrorMessage> errorMessages = getErrorMessages(MessageErrorCode.DATABASE_ERROR, Collections.singletonList(exception.getMessage()));
+		List<ErrorMessage> errorMessages = getErrorMessages(MessageErrorCode.DATABASE_ERROR,
+				Collections.singletonList(exception.getMessage()));
 		ResponseEntity<ErrorResponse> responseEntity = ResponseEntity.badRequest()
 				.body(new ErrorResponse(errorMessages));
 		log.error("ConstraintViolationException: {}", responseEntity);

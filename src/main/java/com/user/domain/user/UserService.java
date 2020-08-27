@@ -34,8 +34,8 @@ public class UserService {
 	}
 
 	public UserEntity findByUserId(final Long userId) {
-		return userRepository.findById(userId)
-				.orElseThrow(() -> new NotFoundException(MessageErrorCode.USER_NOT_FOUND, singletonList(userId.toString())));
+		return userRepository.findById(userId).orElseThrow(
+				() -> new NotFoundException(MessageErrorCode.USER_NOT_FOUND, singletonList(userId.toString())));
 
 	}
 

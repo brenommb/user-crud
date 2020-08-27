@@ -17,7 +17,8 @@ public class CompanyService {
 
 	public CompanyEntity findByCompanyNumber(final Long companyNumber) {
 		return companyRepository.findByCompanyNumber(companyNumber)
-				.orElseThrow(() -> new NotFoundException(MessageErrorCode.COMPANY_NOT_FOUND, singletonList(companyNumber.toString())));
+				.orElseThrow(() -> new NotFoundException(MessageErrorCode.COMPANY_NOT_FOUND,
+						singletonList(companyNumber.toString())));
 
 	}
 

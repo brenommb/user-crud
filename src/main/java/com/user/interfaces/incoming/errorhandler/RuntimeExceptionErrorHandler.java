@@ -26,8 +26,8 @@ public class RuntimeExceptionErrorHandler extends ExceptionErrorHandler<RuntimeE
 	protected ResponseEntity build(final RuntimeException exception) {
 		final String errorMessage = super.getMessage(MessageErrorCode.UNEXPECTED_INTERNAL);
 		log.error(errorMessage, exception);
-		final List<ErrorMessage> errorMessages = Collections
-				.singletonList(new ErrorMessage(MessageErrorCode.UNEXPECTED_INTERNAL, errorMessage, exception.getLocalizedMessage()));
+		final List<ErrorMessage> errorMessages = Collections.singletonList(
+				new ErrorMessage(MessageErrorCode.UNEXPECTED_INTERNAL, errorMessage, exception.getLocalizedMessage()));
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(errorMessages));
 	}
 
