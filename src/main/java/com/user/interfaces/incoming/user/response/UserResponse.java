@@ -1,4 +1,4 @@
-package com.user.interfaces.incoming.response;
+package com.user.interfaces.incoming.user.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

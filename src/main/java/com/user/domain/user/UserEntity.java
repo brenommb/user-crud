@@ -1,6 +1,7 @@
 package com.user.domain.user;
 
 import com.user.domain.common.BaseEntity;
+import com.user.domain.company.CompanyEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -25,8 +26,9 @@ public class UserEntity extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
 	Long userId;
 
-	@Column(name = "idt_company", nullable = false)
-	Long companyId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idt_company", nullable = false)
+	CompanyEntity company;
 
 	@Size(max = 255)
 	@Column(name = "des_email", nullable = false)

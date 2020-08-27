@@ -1,4 +1,4 @@
-package com.user.interfaces.incoming.request;
+package com.user.interfaces.incoming.user.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserRequest {
+public class PersistUserRequest {
 
 	@NotNull(message = "mandatory_field")
 	private Long companyId;

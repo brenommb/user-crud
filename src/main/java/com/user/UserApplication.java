@@ -6,11 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.net.InetAddress;
 
 @SpringBootApplication
 @Slf4j
+@EnableWebMvc
 public class UserApplication {
 
 	private static final String ACCESS_URLS_MESSAGE_LOG = "\n\n Access URLs:\n----------------------------------------------------------\n\t External: \thttp://{}:{}/swagger-ui.html# Profiles: {}\n----------------------------------------------------------\n";

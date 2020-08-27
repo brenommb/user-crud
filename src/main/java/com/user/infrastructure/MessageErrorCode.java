@@ -7,6 +7,8 @@ public class MessageErrorCode {
 
 	public static final String USER_NOT_FOUND = "user_not_found";
 
+	public static final String COMPANY_NOT_FOUND = "company_not_found";
+
 	public static final String MANDATORY_FIELD = "mandatory_field";
 
 	public static final String UNEXPECTED_INTERNAL = "unexpected_internal_error";

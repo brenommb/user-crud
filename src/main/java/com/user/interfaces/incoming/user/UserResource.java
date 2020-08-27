@@ -1,10 +1,10 @@
-package com.user.interfaces.incoming;
+package com.user.interfaces.incoming.user;
 
 import com.user.domain.user.UserEntity;
-import com.user.interfaces.incoming.mapping.UserMapper;
-import com.user.interfaces.incoming.request.UserRequest;
 import com.user.domain.user.UserService;
-import com.user.interfaces.incoming.response.UserResponse;
+import com.user.interfaces.incoming.user.mapping.UserMapper;
+import com.user.interfaces.incoming.user.request.PersistUserRequest;
+import com.user.interfaces.incoming.user.response.UserResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("/point")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserResource {
 
@@ -28,7 +28,7 @@ public class UserResource {
 	@ApiOperation(value = "This endpoint will save a user.", response = UserResponse.class)
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public ResponseEntity persist(@Valid @RequestBody final UserRequest request) {
+	public ResponseEntity persist(@Valid @RequestBody final PersistUserRequest request) {
 		final UserEntity userEntity = userMapper.mapRequestToEntity(request);
 		return ResponseEntity.status(CREATED).body(userMapper.mapToResponse(userService.persistUser(userEntity)));
 	}
@@ -46,6 +46,13 @@ public class UserResource {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity getUserById(@PathVariable final Long userId) {
 		return ResponseEntity.ok(userMapper.mapToResponse(userService.findByUserId(userId)));
+	}
+
+	@ApiOperation(value = "This endpoint will return a user.", response = UserResponse.class)
+	@GetMapping(value = "email/{email}/")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity getByEmail(@PathVariable final String email) {
+		return ResponseEntity.ok(userMapper.mapEntityListToResponse(userService.findByEmail(email)));
 	}
 
 }
