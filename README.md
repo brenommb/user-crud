@@ -2,4 +2,4 @@
 Aplicação para cadastro de usuários (CRUD).
 
 #Inicialização
-./gradlew bootRun
+./init-local.sh
