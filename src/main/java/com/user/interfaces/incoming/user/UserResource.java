@@ -55,4 +55,11 @@ public class UserResource {
 		return ResponseEntity.ok(userMapper.mapEntityListToResponse(userService.findByEmail(email)));
 	}
 
+	@ApiOperation(value = "This endpoint will return a user.", response = UserResponse.class)
+	@GetMapping(value = "company-id/{companyId}/")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity getByCompanyId(@PathVariable final Long companyId) {
+		return ResponseEntity.ok(userMapper.mapEntityListToResponse(userService.findByCompanyId(companyId)));
+	}
+
 }

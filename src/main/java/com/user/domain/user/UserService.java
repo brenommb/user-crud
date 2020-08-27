@@ -40,8 +40,11 @@ public class UserService {
 	}
 
 	public List<UserEntity> findByEmail(final String email) {
-		List<UserEntity> listUsers = userRepository.findByEmail(email);
-		return listUsers;
+		return userRepository.findByEmail(email);
+	}
+
+	public List<UserEntity> findByCompanyId(final Long companyId) {
+		return userRepository.findByCompany_CompanyNumber(companyId);
 	}
 
 }

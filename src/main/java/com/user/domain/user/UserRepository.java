@@ -8,4 +8,6 @@ interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findByEmail(String email);
 
+    List<UserEntity> findByCompany_CompanyNumber(Long companyNumber);
+
 }
