@@ -41,4 +41,11 @@ public class UserResource {
 		return ResponseEntity.ok(userMapper.mapEntityListToResponse(userEntityList));
 	}
 
+	@ApiOperation(value = "This endpoint will return a user.", response = UserResponse.class)
+	@GetMapping("/user-id/{userId}")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity getUserById(@PathVariable final Long userId) {
+		return ResponseEntity.ok(userMapper.mapToResponse(userService.findByUserId(userId)));
+	}
+
 }

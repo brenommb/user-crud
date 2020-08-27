@@ -30,14 +30,14 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select() //
-				.apis(RequestHandlerSelectors.basePackage("com.customer")) //
+				.apis(RequestHandlerSelectors.basePackage("com.user")) //
 				.paths(PathSelectors.any()) //
 				.build()//
 				.apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Customer API").description("Demo Inc.").termsOfServiceUrl("")
+		return new ApiInfoBuilder().title("User API").description("Demo Inc.").termsOfServiceUrl("")
 				.contact(new Contact("Breno Morais", "https://github.com/brenommb", "brenomeneses@yahoo.com.br"))
 				.build();
 	}

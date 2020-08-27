@@ -1,6 +1,6 @@
 package com.user.interfaces.incoming.errorhandler;
 
-import com.user.infrastructure.MessageCode;
+import com.user.infrastructure.MessageErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -24,10 +24,10 @@ public class IllegalArgumentExceptionErrorHandler extends ExceptionErrorHandler<
 
 	@Override
 	protected ResponseEntity build(final IllegalArgumentException exception) {
-		final String errorMessage = super.getMessage(MessageCode.INVALID_ARGUMENT);
+		final String errorMessage = super.getMessage(MessageErrorCode.INVALID_ARGUMENT);
 		log.error(errorMessage, exception);
 		final List<ErrorMessage> errorMessages = Collections
-				.singletonList(new ErrorMessage(MessageCode.INVALID_ARGUMENT, errorMessage, exception.getLocalizedMessage()));
+				.singletonList(new ErrorMessage(MessageErrorCode.INVALID_ARGUMENT, errorMessage, exception.getLocalizedMessage()));
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(errorMessages));
 	}
 

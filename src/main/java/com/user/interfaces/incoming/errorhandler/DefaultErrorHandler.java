@@ -5,17 +5,17 @@ import com.user.domain.common.exceptions.BadRequestException;
 import com.user.domain.common.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolationException;
 import java.util.Locale;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
-public class ApplicationErrorHandler {
+public class DefaultErrorHandler {
 
 	private final MessageSource messageSource;
 
@@ -30,10 +30,10 @@ public class ApplicationErrorHandler {
 		return ApplicationExceptionErrorHandler.build(exception, messageSource, locale);
 	}
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity handleConstraintViolationException(final ConstraintViolationException exception,
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity handleConstraintViolationException(final DataIntegrityViolationException exception,
 			final Locale locale) {
-		return ConstraintViolationExceptionErrorHandler.build(exception, messageSource, locale);
+		return DataIntegrityViolationExceptionErrorHandler.build(exception, messageSource, locale);
 	}
 
 	@ExceptionHandler(NotFoundException.class)

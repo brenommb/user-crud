@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.user.infrastructure.MessageCode.UNEXPECTED_INTERNAL;
+import static com.user.infrastructure.MessageErrorCode.UNEXPECTED_INTERNAL;
 
 @RequiredArgsConstructor
 public abstract class ExceptionErrorHandler<T> {

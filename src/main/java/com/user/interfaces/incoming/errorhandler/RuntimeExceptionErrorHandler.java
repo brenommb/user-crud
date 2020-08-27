@@ -1,6 +1,6 @@
 package com.user.interfaces.incoming.errorhandler;
 
-import com.user.infrastructure.MessageCode;
+import com.user.infrastructure.MessageErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -24,10 +24,10 @@ public class RuntimeExceptionErrorHandler extends ExceptionErrorHandler<RuntimeE
 
 	@Override
 	protected ResponseEntity build(final RuntimeException exception) {
-		final String errorMessage = super.getMessage(MessageCode.UNEXPECTED_INTERNAL);
+		final String errorMessage = super.getMessage(MessageErrorCode.UNEXPECTED_INTERNAL);
 		log.error(errorMessage, exception);
 		final List<ErrorMessage> errorMessages = Collections
-				.singletonList(new ErrorMessage(MessageCode.UNEXPECTED_INTERNAL, errorMessage, exception.getLocalizedMessage()));
+				.singletonList(new ErrorMessage(MessageErrorCode.UNEXPECTED_INTERNAL, errorMessage, exception.getLocalizedMessage()));
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(errorMessages));
 	}
 

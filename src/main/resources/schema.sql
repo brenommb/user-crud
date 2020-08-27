@@ -10,3 +10,5 @@ CREATE TABLE user_crud_db.user (
     dat_creation        TIMESTAMP,
     CONSTRAINT user_pkey PRIMARY KEY (idt_user)
 );
+
+CREATE UNIQUE INDEX index_user_email ON user_crud_db.user(idt_company, des_email);

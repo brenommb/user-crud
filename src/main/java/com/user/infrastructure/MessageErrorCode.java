@@ -3,7 +3,7 @@ package com.user.infrastructure;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class MessageCode {
+public class MessageErrorCode {
 
 	public static final String USER_NOT_FOUND = "user_not_found";
 
@@ -18,5 +18,7 @@ public class MessageCode {
 	public static final String INTEGRATION_FAIL = "integration_fail";
 
 	public static final String INVALID_ARGUMENT = "invalid_argument";
+
+	public static final String DATABASE_ERROR = "database_error";
 
 }

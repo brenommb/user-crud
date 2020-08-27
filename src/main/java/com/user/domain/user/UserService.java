@@ -1,12 +1,15 @@
 package com.user.domain.user;
 
-import com.user.domain.common.utils.CommonUtils;
+import com.user.domain.common.exceptions.NotFoundException;
+import com.user.infrastructure.MessageErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 @Slf4j
 @Service
@@ -17,17 +20,17 @@ public class UserService {
 
 	@Transactional
 	public UserEntity persistUser(final UserEntity userEntity) {
-		checkEntityToPersist(userEntity);
 		return userRepository.save(userEntity);
-	}
-
-	private void checkEntityToPersist(final UserEntity userEntity) {
-		//TODO: Remover esse método, se for o caso usa optional com flatmap
-		CommonUtils.verifyNullArgs(userEntity);
 	}
 
 	public List<UserEntity> getUserList() {
 		return userRepository.findAll();
+	}
+
+	public UserEntity findByUserId(final Long userId) {
+		return userRepository.findById(userId)
+				.orElseThrow(() -> new NotFoundException(MessageErrorCode.USER_NOT_FOUND, singletonList(userId.toString())));
+
 	}
 
 }
