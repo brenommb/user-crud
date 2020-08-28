@@ -10,7 +10,7 @@ Aplicação para cadastro de usuários (CRUD). Objetivo deste projeto é um CRUD
 - Jackson
 
 # Rotina de inserção csv
-A rotina irá rodar ao iniciar a aplicação e a cada 30 segundos irá verificar a pasta de resources.
+A rotina irá rodar ao iniciar a aplicação e a cada 30 segundos após terminar a anterior irá verificar a pasta de resources.
 
 # Inicialização
 Adicione os arquivos .csv em `src/main/resources`. 
