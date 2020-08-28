@@ -1,7 +1,7 @@
 package com.user.interfaces.incoming.user;
 
 import com.user.domain.user.UserService;
-import com.user.infrastructure.ReaderCsv;
+import com.user.infrastructure.CsvAdapter;
 import com.user.interfaces.incoming.user.mapping.UserMapper;
 import com.user.interfaces.incoming.user.request.UserCsv;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -41,7 +42,7 @@ public class UserSchedulePersistCsv {
 					log.error(ex.getMessage());
 				}
 			});
-
+			CsvAdapter.deleteFile(filename);
 		}
 
 	}
@@ -52,7 +53,12 @@ public class UserSchedulePersistCsv {
 	}
 
 	private static List<UserCsv> getUsersCsv(final String filename) {
-		return ReaderCsv.loadObjectList(UserCsv.class, filename);
+		try {
+			return CsvAdapter.loadObjectList(UserCsv.class, filename);
+		} catch (Exception e) {
+			log.error("Error occurred while loading object list from file " + filename + "msg: " + e.getMessage());
+		}
+		return Collections.emptyList();
 	}
 
 }
