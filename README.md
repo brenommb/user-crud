@@ -1,5 +1,5 @@
 # user-crud
-Aplicação para cadastro de usuários (CRUD). Objetivo deste projeto é um CRUD com leitura de arquivos csv.
+Aplicação para cadastro de usuários (CRUD). Objetivo deste projeto é um CRUD com leitura de arquivos csv. Tempo total de desenvolvimento: 12 horas
 
 # Tecnologias
 
