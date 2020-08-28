@@ -26,3 +26,6 @@ A infrastructure são as configurações da aplicação.
 Tem um pacote de testes que verifica os pacotes para manter dentro da arquitetura
 O banco H2 está em memória e será apagado sempre que desligar a aplicação.
 Mensagens de erros estão configuradas no message.properties nas resources.
+
+# TODO
+Testes integrados com JUnit4 e MockMvc com container do H2.
