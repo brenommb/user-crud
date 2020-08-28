@@ -7,6 +7,7 @@ Aplicação para cadastro de usuários (CRUD). Objetivo deste projeto é um CRUD
 - Spring Boot 2.0.8.RELEASE
 - Banco H2 embedded
 - Gradle
+- Jackson
 
 # Rotina de inserção csv
 A rotina irá rodar ao iniciar a aplicação e a cada 30 segundos irá verificar a pasta de resources.
