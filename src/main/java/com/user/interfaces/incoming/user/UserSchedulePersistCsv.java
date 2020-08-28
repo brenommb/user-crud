@@ -5,35 +5,54 @@ import com.user.infrastructure.ReaderCsv;
 import com.user.interfaces.incoming.user.mapping.UserMapper;
 import com.user.interfaces.incoming.user.request.UserCsv;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 @EnableScheduling
 @RequiredArgsConstructor
 public class UserSchedulePersistCsv {
 
-    private static final long FIXED_DELAY = 30000;
+	private static final long FIXED_DELAY = 30000;
 
-    private static final String USERS_FILENAME = "insert_users.csv";
+	private final UserService userService;
 
-    private final UserService userService;
+	private final UserMapper userMapper;
 
-    private final UserMapper userMapper;
+	@Scheduled(fixedDelay = FIXED_DELAY)
+	public void scheduleUserInsert() {
+		for (String filename : getCsvFileNameList()) {
+			List<UserCsv> usersCsv = getUsersCsv(filename);
+			usersCsv.forEach(csv -> {
+				try {
+					userService.persistUser(userMapper.mapCsvToEntity(csv));
+				}
+				catch (Exception ex) {
+					log.error(ex.getMessage());
+				}
+			});
 
+		}
 
-    @Scheduled(fixedDelay = FIXED_DELAY)
-    public void scheduleUserInsert() {
-        List<UserCsv> usersCsv = getUsersCsv();
-        usersCsv.forEach(csv ->
-                userService.persistUser(userMapper.mapCsvToEntity(csv))
-        );
-    }
+	}
 
-    private static List<UserCsv> getUsersCsv() {
-        return ReaderCsv.loadObjectList(UserCsv.class, USERS_FILENAME);
-    }
+	private static List<String> getCsvFileNameList() {
+		Set<String> resources = new Reflections(new ResourcesScanner()).getResources(Pattern.compile(".*\\.csv"));
+		return new ArrayList<>(resources);
+	}
+
+	private static List<UserCsv> getUsersCsv(final String filename) {
+		return ReaderCsv.loadObjectList(UserCsv.class, filename);
+	}
+
 }

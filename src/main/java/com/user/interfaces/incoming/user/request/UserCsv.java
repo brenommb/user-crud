@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserCsv {
 
-    private Long companyId;
+	private Long companyId;
 
-    private String email;
+	private String email;
 
-    private String birthdate;
+	private String birthdate;
+
 }

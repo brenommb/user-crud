@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -27,10 +25,11 @@ public class UserResource {
 
 	@ApiOperation(value = "This endpoint will save a user.", response = UserResponse.class)
 	@PostMapping
-	@ResponseStatus(CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity persist(@Valid @RequestBody final PersistUserRequest request) {
 		final UserEntity userEntity = userMapper.mapRequestToEntity(request);
-		return ResponseEntity.status(CREATED).body(userMapper.mapToResponse(userService.persistUser(userEntity)));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(userMapper.mapToResponse(userService.persistUser(userEntity)));
 	}
 
 	@ApiOperation(value = "This endpoint will return a list of user.", response = UserResponse.class)
