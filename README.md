@@ -8,6 +8,7 @@ Aplicação para cadastro de usuários (CRUD). Objetivo deste projeto é um CRUD
 - Banco H2 embedded
 - Gradle
 - Jackson
+- Swagger
 
 # Rotina de inserção csv
 A rotina irá rodar ao iniciar a aplicação e a cada 30 segundos após terminar a anterior irá verificar a pasta de resources.
@@ -27,6 +28,9 @@ A infrastructure são as configurações da aplicação.
 Tem um pacote de testes que verifica os pacotes para manter dentro da arquitetura
 O banco H2 está em memória e será apagado sempre que desligar a aplicação.
 Mensagens de erros estão configuradas no message.properties nas resources.
+
+# Documentação
+Ao iniciar a aplicação acesse o swagger: http://127.0.1.1:8082/swagger-ui.html#
 
 # TODO
 Testes integrados com JUnit4 e MockMvc com container do H2.
